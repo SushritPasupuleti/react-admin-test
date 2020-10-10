@@ -7,7 +7,7 @@ export const PostEdit = props => (
             <ReferenceInput source="userId" reference="users"><SelectInput optionText="id" /></ReferenceInput>
             <TextInput source="id" />
             <TextInput source="title" />
-            TextInput multiline source="body" />
+            <TextInput multiline source="body" />
         </SimpleForm>
     </Edit>
 );
