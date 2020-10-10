@@ -11,10 +11,13 @@ import PostEdit from './components/postEdit';
 import PostCreate from './components/postCreate';
 import Dashboard from './components/dashboard';
 
+import authProvider from './auth/authProvider';
+
+
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
 const App = () => (
-  <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+  <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
     {/* <Resource name="users" list={ListGuesser} /> */}
     {/* <Resource name="posts" list={ListGuesser} /> */}
     <Resource name="users" list={UserList} icon={UserIcon}/>
