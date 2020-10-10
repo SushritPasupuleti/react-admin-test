@@ -4,7 +4,8 @@ import { Edit, SimpleForm, ReferenceInput, TextInput, SelectInput } from 'react-
 export const PostEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <ReferenceInput source="userId" reference="users"><SelectInput optionText="id" /></ReferenceInput>
+            <TextInput disabled source="id" />
+            <ReferenceInput source="userId" reference="users"><SelectInput optionText="name" /></ReferenceInput>
             <TextInput source="id" />
             <TextInput source="title" />
             <TextInput multiline source="body" />
