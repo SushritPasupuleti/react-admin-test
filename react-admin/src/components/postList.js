@@ -25,9 +25,9 @@ const PostList = (props) => {
             ) : (
                 <Datagrid>
                     <TextField source="id" />
-                    <ReferenceField label="User" source="userId" reference="users">
+                    {/* <ReferenceField label="User" source="userId" reference="users">
                         <TextField source="name" />
-                    </ReferenceField>
+                    </ReferenceField> */}
                     <TextField source="title" />
                     <TextField source="content" />
                     <EditButton />
