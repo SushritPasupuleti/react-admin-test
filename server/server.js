@@ -1,7 +1,9 @@
+require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+const db = require('./models');
 
 var port = process.env.PORT || 5000;
 
