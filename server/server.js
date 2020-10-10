@@ -9,6 +9,14 @@ const db = require('./models');
 var port = process.env.PORT || 5000;
 
 app.use(cors());
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Expose-Headers", "X-Total-Count, Content-Range");
+    next();
+});
+
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -38,7 +46,7 @@ app.get('/setup', function(req, res) {
 	});
 });
 
-app.get('/post', function (req, res) {
+app.get('/posts', function (req, res) {
 	db.Post.find({}, function (err, posts) {
         var postsMap = [];
 
@@ -50,14 +58,14 @@ app.get('/post', function (req, res) {
     });
 });
 
-app.get('/post/:id', function (req, res) {
+app.get('/posts/:id', function (req, res) {
     db.Post.findById({_id: req.params.id}, function (err, post) {
         res.send(post);
     });
 });
 
 
-app.get('/post/slug/:slug', function (req, res) {
+app.get('/posts/slug/:slug', function (req, res) {
     db.Post.find({slug: req.params.slug}, function (err, post) {
         res.send(post);
     });
@@ -77,7 +85,7 @@ app.post('/post', apiRoutes, function (req, res) {
     });
 });
 
-app.put('/post/:id', apiRoutes, function (req, res) {
+app.put('/posts/:id', apiRoutes, function (req, res) {
 	if (typeof req.body.content === 'undefined' || typeof req.body.title === 'undefined') {
 		res.send(400, {message: 'no content provided'})
 	} else {

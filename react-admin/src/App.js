@@ -13,14 +13,16 @@ import Dashboard from './components/dashboard';
 
 import authProvider from './auth/authProvider';
 
+import simpleRestProvider from 'ra-data-simple-rest';
 
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+const dataProvider = './utils/dataProvider.js'//jsonServerProvider('https://jsonplaceholder.typicode.com');
 
 const App = () => (
-  <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+  <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:5000')}>
+    {/* // <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}> */}
     {/* <Resource name="users" list={ListGuesser} /> */}
     {/* <Resource name="posts" list={ListGuesser} /> */}
-    <Resource name="users" list={UserList} icon={UserIcon}/>
+    {/* <Resource name="users" list={UserList} icon={UserIcon}/> */}
     <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
   </Admin>
 
