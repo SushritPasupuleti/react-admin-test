@@ -19,6 +19,8 @@ app.listen(port, () => {
     console.log(`API is at http://localhost: ${port}`)
 });
 
+var apiRoutes = express.Router(); 
+
 //Setup
 app.get('/setup', function(req, res) {
 
@@ -46,4 +48,42 @@ app.get('/post', function (req, res) {
         res.setHeader('Content-Range', posts.length);
         res.send(postsMap);
     });
+});
+
+app.get('/post/:id', function (req, res) {
+    db.Post.findById({_id: req.params.id}, function (err, post) {
+        res.send(post);
+    });
+});
+
+
+app.get('/post/slug/:slug', function (req, res) {
+    db.Post.find({slug: req.params.slug}, function (err, post) {
+        res.send(post);
+    });
+});
+
+app.post('/post', apiRoutes, function (req, res) {
+    // create a sample post
+    var post = new db.Post({
+        title: req.body.content,
+        content: req.body.title
+    });
+
+    post.save(function(err) {
+        if (err) throw err;
+
+        res.json({ success: true });
+    });
+});
+
+app.put('/post/:id', apiRoutes, function (req, res) {
+	if (typeof req.body.content === 'undefined' || typeof req.body.title === 'undefined') {
+		res.send(400, {message: 'no content provided'})
+	} else {
+        db.Post.update({'_id': req.params.id}, {title: req.body.title, content: req.body.content}, function(err, post){
+            if (err) return res.send(500, { error: err });
+            return res.send({message: 'success update', post:post});
+        });
+	}
 });
