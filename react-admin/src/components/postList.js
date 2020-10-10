@@ -29,7 +29,7 @@ const PostList = (props) => {
                         <TextField source="name" />
                     </ReferenceField>
                     <TextField source="title" />
-                    <TextField source="body" />
+                    <TextField source="content" />
                     <EditButton />
                 </Datagrid>
             )}

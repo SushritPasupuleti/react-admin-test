@@ -71,7 +71,7 @@ app.get('/posts/slug/:slug', function (req, res) {
     });
 });
 
-app.post('/post', apiRoutes, function (req, res) {
+app.post('/posts', apiRoutes, function (req, res) {
     // create a sample post
     var post = new db.Post({
         title: req.body.content,

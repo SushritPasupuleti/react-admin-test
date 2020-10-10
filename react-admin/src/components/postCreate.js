@@ -4,11 +4,11 @@ import { Create, SimpleForm, ReferenceInput, TextInput, SelectInput } from 'reac
 export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <ReferenceInput source="userId" reference="users">
+            {/* <ReferenceInput source="userId" reference="users">
                 <SelectInput optionText="name" />
-            </ReferenceInput>
+            </ReferenceInput> */}
             <TextInput source="title" />
-            <TextInput multiline source="body" />
+            <TextInput multiline source="content" />
         </SimpleForm>
     </Create>
 );
