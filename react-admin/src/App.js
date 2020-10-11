@@ -15,10 +15,26 @@ import authProvider from './auth/authProvider';
 
 import simpleRestProvider from 'ra-data-simple-rest';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import { purple } from '@material-ui/core/colors';
+
 const dataProvider = './utils/dataProvider.js'//jsonServerProvider('https://jsonplaceholder.typicode.com');
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      // Purple and green play nicely together.
+      main: '#11cb5f',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: purple[500],
+    },
+}});
+
 const App = () => (
-  <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:5000')}>
+  <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:5000')}>
     {/* // <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}> */}
     {/* <Resource name="users" list={ListGuesser} /> */}
     {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}/> */}
