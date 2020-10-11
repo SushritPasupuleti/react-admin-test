@@ -7,5 +7,10 @@ module.exports = mongoose.model('Post', new Schema({
     userId: mongoose.Schema.Types.ObjectId,
 	title: String,
 	content: String,
-	instructions: []
+	instructions: [
+		{
+			step: Number,
+			instruction: String,
+		}
+	]
 }).plugin(URLSlugs('title')));

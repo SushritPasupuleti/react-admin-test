@@ -21,9 +21,9 @@ const App = () => (
   <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:5000')}>
     {/* // <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}> */}
     {/* <Resource name="users" list={ListGuesser} /> */}
-    <Resource name="posts" list={ListGuesser} edit={EditGuesser} />
+    {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}/> */}
     {/* <Resource name="users" list={UserList} icon={UserIcon}/> */}
-    {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/> */}
+    <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
   </Admin>
 
 );

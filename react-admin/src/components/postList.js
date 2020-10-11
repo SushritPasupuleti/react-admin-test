@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Filter, ReferenceInput, SelectInput, TextInput, List, TextField, ReferenceField, Datagrid, EditButton, SimpleList } from 'react-admin';
+import { Filter, ReferenceInput, SelectInput, TextInput, List, TextField, ReferenceField, Datagrid, EditButton, SimpleList, ArrayField, SingleFieldList, ChipField } from 'react-admin';
 import { useMediaQuery } from '@material-ui/core';
 
 const PostFilter = (props) => (
@@ -23,16 +23,14 @@ const PostList = (props) => {
                     tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
                 />
             ) : (
-                <Datagrid>
-                    <TextField source="id" />
-                    {/* <ReferenceField label="User" source="userId" reference="users">
-                        <TextField source="name" />
-                    </ReferenceField> */}
-                    <TextField source="title" />
-                    <TextField source="content" />
-                    <EditButton />
-                </Datagrid>
-            )}
+                    <Datagrid rowClick="edit">
+                        <TextField source="id" />
+                        <TextField source="title" />
+                        <TextField source="content" />
+                        <TextField source="slug" />
+                        <ArrayField source="instructions"><SingleFieldList><ChipField source="step" /></SingleFieldList></ArrayField>
+                    </Datagrid>
+                )}
         </List>
     );
 }

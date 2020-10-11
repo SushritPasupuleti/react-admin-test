@@ -1,14 +1,15 @@
 import * as React from "react";
-import { Create, SimpleForm, ReferenceInput, TextInput, SelectInput } from 'react-admin';
+import { Create, SimpleForm, ReferenceInput, TextInput, SelectInput, ArrayInput, SimpleFormIterator, NumberInput } from 'react-admin';
 
 export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            {/* <ReferenceInput source="userId" reference="users">
-                <SelectInput optionText="name" />
-            </ReferenceInput> */}
+            {/* <TextInput source="id" /> */}
             <TextInput source="title" />
-            <TextInput multiline source="content" />
+            <TextInput source="content" />
+            <TextInput source="slug" />
+            <ArrayInput source="instructions"><SimpleFormIterator><NumberInput source="step" />
+                <TextInput multiline source="instruction" /></SimpleFormIterator></ArrayInput>
         </SimpleForm>
     </Create>
 );

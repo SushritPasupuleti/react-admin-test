@@ -1,18 +1,19 @@
 import * as React from "react";
-import { Edit, SimpleForm, ReferenceInput, TextInput, SelectInput } from 'react-admin';
+import { Edit, SimpleForm, ReferenceInput, TextInput, SelectInput, ArrayInput, SimpleFormIterator, NumberInput } from 'react-admin';
 
 export const PostTitle = ({ record }) => {
     return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
 export const PostEdit = props => (
-    <Edit title={<PostTitle/>} {...props}>
+    <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" />
-            {/* <ReferenceInput source="userId" reference="users"><SelectInput optionText="name" /></ReferenceInput> */}
-            {/* <TextInput source="id" /> */}
+            <TextInput source="id" />
             <TextInput source="title" />
-            <TextInput multiline source="content" />
+            <TextInput source="content" />
+            <TextInput source="slug" />
+            <ArrayInput source="instructions"><SimpleFormIterator><NumberInput source="step" />
+                <TextInput multiline source="instruction" /></SimpleFormIterator></ArrayInput>
         </SimpleForm>
     </Edit>
 );
