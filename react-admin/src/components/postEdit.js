@@ -8,7 +8,7 @@ export const PostTitle = ({ record }) => {
 export const PostEdit = props => (
     <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
-            <TextInput source="id" />
+            <TextInput disabled source="id" />
             <TextInput source="title" />
             <TextInput source="content" />
             {/* <TextInput source="slug" /> */}
