@@ -75,7 +75,8 @@ app.post('/posts', apiRoutes, function (req, res) {
     // create a sample post
     var post = new db.Post({
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        instructions: req.body.instructions
     });
 
     post.save(function (err) {
@@ -89,7 +90,7 @@ app.put('/posts/:id', apiRoutes, function (req, res) {
     if (typeof req.body.content === 'undefined' || typeof req.body.title === 'undefined') {
         res.send(400, { message: 'no content provided' })
     } else {
-        db.Post.update({ '_id': req.params.id }, { title: req.body.title, content: req.body.content }, function (err, post) {
+        db.Post.update({ '_id': req.params.id }, { title: req.body.title, content: req.body.content, instructions: req.body.instructions }, function (err, post) {
             if (err) return res.send(500, { error: err });
             return res.send({ message: 'success update', post: post });
         });
