@@ -24,7 +24,7 @@ const PostList = (props) => {
                 />
             ) : (
                     <Datagrid rowClick="edit">
-                        <TextField source="id" />
+                        {/* <TextField source="id" /> */}
                         <TextField source="title" />
                         <TextField source="content" />
                         {/* <TextField source="slug" /> */}
