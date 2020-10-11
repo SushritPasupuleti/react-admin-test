@@ -27,7 +27,7 @@ const PostList = (props) => {
                         <TextField source="id" />
                         <TextField source="title" />
                         <TextField source="content" />
-                        <TextField source="slug" />
+                        {/* <TextField source="slug" /> */}
                         <ArrayField source="instructions"><SingleFieldList><ChipField source="step" /></SingleFieldList></ArrayField>
                     </Datagrid>
                 )}
