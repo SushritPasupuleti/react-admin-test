@@ -51,7 +51,7 @@ app.get('/posts', function (req, res) {
         var postsMap = [];
 
         posts.forEach(function (post) {
-            postsMap.push({ id: post._id, title: post.title, content: post.content, slug: post.slug })
+            postsMap.push({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions })
         });
         res.setHeader('Content-Range', posts.length);
         res.send(postsMap);
