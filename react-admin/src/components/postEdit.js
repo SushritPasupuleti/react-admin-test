@@ -11,7 +11,7 @@ export const PostEdit = props => (
             <TextInput source="id" />
             <TextInput source="title" />
             <TextInput source="content" />
-            <TextInput source="slug" />
+            {/* <TextInput source="slug" /> */}
             <ArrayInput source="instructions"><SimpleFormIterator><NumberInput source="step" />
                 <TextInput multiline source="instruction" /></SimpleFormIterator></ArrayInput>
         </SimpleForm>
