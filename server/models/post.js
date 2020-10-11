@@ -6,5 +6,6 @@ var URLSlugs = require('mongoose-url-slugs');
 module.exports = mongoose.model('Post', new Schema({
     userId: mongoose.Schema.Types.ObjectId,
 	title: String,
-	content: String
+	content: String,
+	instructions: []
 }).plugin(URLSlugs('title')));
