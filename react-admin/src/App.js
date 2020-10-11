@@ -15,33 +15,40 @@ import authProvider from './auth/authProvider';
 
 import simpleRestProvider from 'ra-data-simple-rest';
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { purple } from '@material-ui/core/colors';
 
 const dataProvider = './utils/dataProvider.js'//jsonServerProvider('https://jsonplaceholder.typicode.com');
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    primary: {
-      // Purple and green play nicely together.
-      main: '#11cb5f',
-    },
-    secondary: {
-      // This is green.A700 as hex.
-      main: purple[500],
-    },
-}});
+const App = () => {
 
-const App = () => (
-  <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:5000')}>
-    {/* // <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}> */}
-    {/* <Resource name="users" list={ListGuesser} /> */}
-    {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}/> */}
-    {/* <Resource name="users" list={UserList} icon={UserIcon}/> */}
-    <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
-  </Admin>
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-);
+  const theme = createMuiTheme({
+    palette: {
+      type: prefersDarkMode ? 'dark' : 'light',
+      primary: {
+        // Purple and green play nicely together.
+        main: '#11cb5f',
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: purple[500],
+      },
+    }
+  });
+
+  return (
+    <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={simpleRestProvider('http://localhost:5000')}>
+      {/* // <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}> */}
+      {/* <Resource name="users" list={ListGuesser} /> */}
+      {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}/> */}
+      {/* <Resource name="users" list={UserList} icon={UserIcon}/> */}
+      <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
+    </Admin>
+
+  )
+};
 
 export default App;
