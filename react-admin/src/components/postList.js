@@ -5,9 +5,9 @@ import { useMediaQuery } from '@material-ui/core';
 const PostFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Search" source="q" alwaysOn />
-        <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
+        {/* <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
             <SelectInput optionText="name" />
-        </ReferenceInput>
+        </ReferenceInput> */}
     </Filter>
 );
 
@@ -15,7 +15,7 @@ const PostList = (props) => {
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
     return (
-        <List {...props}>
+        <List filters={<PostFilter />} {...props}>
             {isSmall ? (
                 <SimpleList
                     primaryText={record => record.title}
