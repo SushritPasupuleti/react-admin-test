@@ -8,8 +8,12 @@ export const PostCreate = props => (
             <TextInput source="title" />
             <TextInput source="content" />
             {/* <TextInput source="slug" /> */}
-            <ArrayInput source="instructions"><SimpleFormIterator><NumberInput source="step" />
-                <TextInput multiline source="instruction" /></SimpleFormIterator></ArrayInput>
+            <ArrayInput source="instructions">
+                <SimpleFormIterator>
+                    <NumberInput source="step" />
+                    <TextInput multiline source="instruction" />
+                </SimpleFormIterator>
+            </ArrayInput>
         </SimpleForm>
     </Create>
 );
