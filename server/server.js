@@ -107,3 +107,66 @@ app.delete('/posts/:id', apiRoutes, function (req, res) {
         return res.send(500, { error: err });
     });
 });
+
+////USERS////
+app.get('/users', function (req, res) {
+    db.User.find({}, function (err, users) {
+        var usersMap = [];
+
+        users.forEach(function (user) {
+            usersMap.push({ id: user._id, name: user.name, isAdmin: user.admin })
+        });
+        res.setHeader('Content-Range', users.length);
+        res.send(usersMap);
+    });
+});
+
+app.get('/users/:id', function (req, res) {
+    db.User.findById({ _id: req.params.id }, function (err, user) {
+        res.send(user);
+    });
+});
+
+
+app.get('/users/slug/:slug', function (req, res) {
+    db.User.find({ slug: req.params.slug }, function (err, user) {
+        res.send(user);
+    });
+});
+
+app.post('/users', apiRoutes, function (req, res) {
+    // create a sample user
+    var user = new db.User({
+        title: req.body.title,
+        content: req.body.content,
+        instructions: req.body.instructions
+    });
+
+    user.save(function (err) {
+        if (err) throw err;
+
+        res.json({ success: true });
+    });
+});
+
+app.put('/users/:id', apiRoutes, function (req, res) {
+    if (typeof req.body.content === 'undefined' || typeof req.body.title === 'undefined') {
+        res.send(400, { message: 'no content provided' })
+    } else {
+        db.User.update({ '_id': req.params.id }, { title: req.body.title, content: req.body.content, instructions: req.body.instructions }, function (err, user) {
+            if (err) return res.send(500, { error: err });
+            return res.send({ message: 'success update', user: user });
+        });
+    }
+});
+
+app.delete('/users/:id', apiRoutes, function (req, res) {
+
+    db.User.findByIdAndDelete({ '_id': req.params.id }).then(
+        function () {
+            res.send({ message: 'success delete' })
+        }
+    ).catch(function (err) {
+        return res.send(500, { error: err });
+    });
+});
