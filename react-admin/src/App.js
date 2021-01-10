@@ -6,6 +6,7 @@ import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
 
 import UserList from './components/userList';
+import UserEdit from './components/userEdit';
 import PostList from './components/postList';
 import PostEdit from './components/postEdit';
 import PostCreate from './components/postCreate';
@@ -18,6 +19,7 @@ import simpleRestProvider from 'ra-data-simple-rest';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { purple } from '@material-ui/core/colors';
+import UserCreate from "./components/userCreate";
 
 const dataProvider = './utils/dataProvider.js'//jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -44,7 +46,7 @@ const App = () => {
       {/* // <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}> */}
       {/* <Resource name="users" list={ListGuesser} /> */}
       {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}/> */}
-      <Resource name="users" list={UserList} icon={UserIcon}/>
+      <Resource name="users" list={UserList} edit={UserEdit} icon={UserIcon} create={UserCreate}/>
       <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
     </Admin>
 
