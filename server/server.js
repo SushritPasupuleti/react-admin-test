@@ -59,15 +59,16 @@ app.get('/posts', function (req, res) {
 });
 
 app.get('/posts/:id', function (req, res) {
+    console.table(req.params)
     db.Post.findById({ _id: req.params.id }, function (err, post) {
-        res.send(post);
+        res.send({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions, createdBy: post.createdBy, userId: post.userId });
     });
 });
 
 
 app.get('/posts/slug/:slug', function (req, res) {
     db.Post.find({ slug: req.params.slug }, function (err, post) {
-        res.send(post);
+        res.send({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions, createdBy: post.createdBy, userId: post.userId });
     });
 });
 
@@ -92,9 +93,9 @@ app.put('/posts/:id', apiRoutes, function (req, res) {
     if (typeof req.body.content === 'undefined' || typeof req.body.title === 'undefined') {
         res.send(400, { message: 'no content provided' })
     } else {
-        db.Post.update({ '_id': req.params.id }, { title: req.body.title, content: req.body.content, instructions: req.body.instructions, createdBy: req.body.createdBy, userId: req.body.userId }, function (err, post) {
+        db.Post.findByIdAndUpdate({ '_id': req.params.id }, { title: req.body.title, content: req.body.content, instructions: req.body.instructions, createdBy: req.body.createdBy, userId: req.body.userId }, {new: true}, function (err, post) {
             if (err) return res.send(500, { error: err });
-            return res.send({ message: 'success update', post: post });
+            return res.send({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions, createdBy: post.createdBy, userId: post.userId });
         });
     }
 });
@@ -125,14 +126,14 @@ app.get('/users', function (req, res) {
 
 app.get('/users/:id', function (req, res) {
     db.User.findById({ _id: req.params.id }, function (err, user) {
-        res.send(user);
+        res.send({ id: user._id, name: user.name, admin: user.admin });
     });
 });
 
 
 app.get('/users/slug/:slug', function (req, res) {
     db.User.find({ slug: req.params.slug }, function (err, user) {
-        res.send(user);
+        res.send({ id: user._id, name: user.name, admin: user.admin });
     });
 });
 
@@ -155,12 +156,12 @@ app.put('/users/:id', apiRoutes, function (req, res) {
     if (typeof req.body.name === 'undefined' || typeof req.body.admin === "undefined") {
         res.send(400, { message: 'no content provided' })
     } else {
-        db.User.update({ '_id': req.params.id }, {
+        db.User.findByIdAndUpdate({ '_id': req.params.id }, {
             name: req.body.name,
             admin: req.body.admin
-        }, function (err, user) {
+        }, {new: true}, function (err, user) {
             if (err) return res.send(500, { error: err });
-            return res.send({ message: 'success update', user: user });
+            return res.send({ id: user._id, name: user.name, admin: user.admin });
         });
     }
 });

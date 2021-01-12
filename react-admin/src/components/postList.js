@@ -9,6 +9,8 @@ const PostFilter = (props) => (
         {/* <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
             <SelectInput optionText="name" />
         </ReferenceInput> */}
+          <TextInput label="Title" source="title" defaultValue="" />
+          <TextInput label="Author" source="createdBy" defaultValue="" />
     </Filter>
 );
 
