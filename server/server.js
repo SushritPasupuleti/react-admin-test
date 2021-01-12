@@ -47,7 +47,12 @@ app.get('/setup', function (req, res) {
 });
 
 app.get('/posts', function (req, res) {
-    db.Post.find({}, function (err, posts) {
+    console.table(req.query);
+    console.table(req.params);
+    // console.log(req)
+    db.Post.find({})
+    
+    .then((posts) => {
         var postsMap = [];
 
         posts.forEach(function (post) {
