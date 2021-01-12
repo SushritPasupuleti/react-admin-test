@@ -26,7 +26,7 @@ const PostList = (props) => {
                     tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
                 />
             ) : (
-                    <Datagrid rowClick="edit" expand={<ExpandedDetails></ExpandedDetails>}>
+                    <Datagrid rowsPerPageOptions={[]} rowClick="edit" expand={<ExpandedDetails></ExpandedDetails>}>
                         {/* <TextField source="userId" /> */}
                         <TextField source="title" />
                         <TextField source="content" />
