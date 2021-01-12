@@ -12,5 +12,6 @@ module.exports = mongoose.model('Post', new Schema({
 			step: Number,
 			instruction: String,
 		}
-	]
+	],
+	createdBy: String
 }).plugin(URLSlugs('title')));
