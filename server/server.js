@@ -50,8 +50,12 @@ app.get('/posts', function (req, res) {
     console.table(req.query);
     console.table(req.params);
     // console.log(req)
-    db.Post.find({})
     
+    let sortField = JSON.parse(req.query.sort)[0]
+    let sortDirection = JSON.parse(req.query.sort)[1] === "ASC" ? 1 : -1
+
+    db.Post.find(JSON.parse(req.query.filter))
+    .sort({[sortField]: sortDirection})
     .then((posts) => {
         var postsMap = [];
 
