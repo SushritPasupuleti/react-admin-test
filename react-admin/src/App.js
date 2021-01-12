@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin';
+import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
 
 import PostIcon from '@material-ui/icons/Book';
@@ -20,6 +20,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { purple } from '@material-ui/core/colors';
 import UserCreate from "./components/userCreate";
+import PostShow from "./components/postShow";
 
 const dataProvider = './utils/dataProvider.js'//jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -47,7 +48,7 @@ const App = () => {
       {/* <Resource name="users" list={ListGuesser} /> */}
       {/* <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}/> */}
       <Resource name="users" list={UserList} edit={UserEdit} icon={UserIcon} create={UserCreate}/>
-      <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
+      <Resource name="posts" show={PostShow} list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
     </Admin>
 
   )
