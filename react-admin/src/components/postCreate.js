@@ -14,6 +14,7 @@ export const PostCreate = props => (
                     <TextInput multiline source="instruction" />
                 </SimpleFormIterator>
             </ArrayInput>
+            <TextInput source="createdBy" />
         </SimpleForm>
     </Create>
 );
