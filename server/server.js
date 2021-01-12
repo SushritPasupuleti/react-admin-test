@@ -51,7 +51,7 @@ app.get('/posts', function (req, res) {
         var postsMap = [];
 
         posts.forEach(function (post) {
-            postsMap.push({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions, createdBy: post.createdBy })
+            postsMap.push({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions, createdBy: post.createdBy, userId: post.userId })
         });
         res.setHeader('Content-Range', posts.length);
         res.send(postsMap);
@@ -77,7 +77,8 @@ app.post('/posts', apiRoutes, function (req, res) {
         title: req.body.title,
         content: req.body.content,
         instructions: req.body.instructions,
-        createdBy: req.body.createdBy
+        createdBy: req.body.createdBy,
+        userId: req.body.userId
     });
 
     post.save(function (err) {
@@ -91,7 +92,7 @@ app.put('/posts/:id', apiRoutes, function (req, res) {
     if (typeof req.body.content === 'undefined' || typeof req.body.title === 'undefined') {
         res.send(400, { message: 'no content provided' })
     } else {
-        db.Post.update({ '_id': req.params.id }, { title: req.body.title, content: req.body.content, instructions: req.body.instructions, createdBy: req.body.createdBy }, function (err, post) {
+        db.Post.update({ '_id': req.params.id }, { title: req.body.title, content: req.body.content, instructions: req.body.instructions, createdBy: req.body.createdBy, userId: req.body.userId }, function (err, post) {
             if (err) return res.send(500, { error: err });
             return res.send({ message: 'success update', post: post });
         });
