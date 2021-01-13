@@ -15,10 +15,11 @@ const PostFilter = (props) => (
 );
 
 const PostList = (props) => {
+    console.log("Props:", {props})
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
     return (
-        <List filters={<PostFilter />} {...props}>
+        <List perPage={10} filters={<PostFilter />} {...props}>
             {isSmall ? (
                 <SimpleList
                     primaryText={record => record.title}
@@ -26,7 +27,7 @@ const PostList = (props) => {
                     tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
                 />
             ) : (
-                    <Datagrid rowsPerPageOptions={[]} rowClick="edit" expand={<ExpandedDetails></ExpandedDetails>}>
+                    <Datagrid rowClick="edit" expand={<ExpandedDetails></ExpandedDetails>}>
                         {/* <TextField source="userId" /> */}
                         <TextField source="title" />
                         <TextField source="content" />

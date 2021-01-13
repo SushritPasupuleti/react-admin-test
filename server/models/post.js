@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var URLSlugs = require('mongoose-url-slugs');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 // set up a mongoose model
 module.exports = mongoose.model('Post', new Schema({
@@ -14,4 +15,6 @@ module.exports = mongoose.model('Post', new Schema({
 		}
 	],
 	createdBy: String
-}).plugin(URLSlugs('title')));
+}).plugin(URLSlugs('title'))
+.plugin(mongoosePaginate)
+);

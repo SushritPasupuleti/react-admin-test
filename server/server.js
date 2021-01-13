@@ -53,17 +53,23 @@ app.get('/posts', function (req, res) {
     
     let sortField = JSON.parse(req.query.sort)[0]
     let sortDirection = JSON.parse(req.query.sort)[1] === "ASC" ? 1 : -1
-
-    db.Post.find(JSON.parse(req.query.filter))
-    .skip(JSON.parse(req.query.range)[0])
-    .sort({[sortField]: sortDirection})
+    
+    // db.Post.find(JSON.parse(req.query.filter))
+    // .skip(JSON.parse(req.query.range)[0])
+    // .sort({[sortField]: sortDirection})
+    // .limit(
+    //     10//JSON.parse(req.query.range)[1] - JSON.parse(req.query.range)[0]
+    //     )
+    db.Post.paginate({}, {offset: JSON.parse(req.query.range)[0], limit: 1 + JSON.parse(req.query.range)[1] - JSON.parse(req.query.range)[0]})
+    // .sort({[sortField]: sortDirection})
     .then((posts) => {
+        //console.log(posts)
         var postsMap = [];
 
-        posts.forEach(function (post) {
+        posts.docs.forEach(function (post) {
             postsMap.push({ id: post._id, title: post.title, content: post.content, slug: post.slug, instructions: post.instructions, createdBy: post.createdBy, userId: post.userId })
         });
-        res.setHeader('Content-Range', posts.length);
+        res.setHeader('Content-Range', posts.totalDocs);
         res.send(postsMap);
     });
 });
