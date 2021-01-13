@@ -60,7 +60,7 @@ app.get('/posts', function (req, res) {
     // .limit(
     //     10//JSON.parse(req.query.range)[1] - JSON.parse(req.query.range)[0]
     //     )
-    db.Post.paginate({}, {offset: JSON.parse(req.query.range)[0], limit: 1 + JSON.parse(req.query.range)[1] - JSON.parse(req.query.range)[0]})
+    db.Post.paginate(JSON.parse(req.query.filter), {sort: {[sortField]: sortDirection}, offset: JSON.parse(req.query.range)[0], limit: 1 + JSON.parse(req.query.range)[1] - JSON.parse(req.query.range)[0]})
     // .sort({[sortField]: sortDirection})
     .then((posts) => {
         //console.log(posts)
